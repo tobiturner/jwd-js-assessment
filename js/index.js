@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded", () => {
     // set a minute variable
     let time = 60;
     // every 1000 miliseconds, execute the callback function
-    setInterval(() => {
+    const timerId = setInterval(() => {
       // decrement the time by one, every second
       time--
       // change the span element after its been decremented
@@ -37,6 +37,7 @@ window.addEventListener("DOMContentLoaded", () => {
       // if it reaches 0, then execute calculateScore() aka the submit button
       if (time <= 0) {
         calculateScore();
+        clearInterval(timerId);
       }
     }, 1000)
   });
