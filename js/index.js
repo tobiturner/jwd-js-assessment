@@ -24,6 +24,21 @@ window.addEventListener("DOMContentLoaded", () => {
   start.addEventListener("click", function (e) {
     document.querySelector("#quizBlock").style.display = "block";
     start.style.display = "none";
+    // obtain timer span element
+    const timer = document.getElementById("time");
+    // set a minute variable
+    let time = 60;
+    // every 1000 miliseconds, execute the callback function
+    setInterval(() => {
+      // decrement the time by one, every second
+      time--
+      // change the span element after its been decremented
+      timer.textContent = `00:${time}`;
+      // if it reaches 0, then execute calculateScore() aka the submit button
+      if (time <= 0) {
+        calculateScore();
+      }
+    }, 1000)
   });
   // quizArray QUESTIONS & ANSWERS
   // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
@@ -107,8 +122,10 @@ window.addEventListener("DOMContentLoaded", () => {
   // call the displayQuiz function
   displayQuiz();
   // Be listening for the click on the submit button
-  document.getElementById("btnSubmit").addEventListener("click", calculateScore,);
+  document.getElementById("btnSubmit").addEventListener("click", calculateScore);
+  // add event listener to btnReset
   document.getElementById("btnReset").addEventListener("click", () => {
+    //change the current location (or url), to the current location (or url) (so reloading it)
     window.location.assign(window.location.href);
   });
 
