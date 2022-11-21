@@ -51,8 +51,8 @@ window.addEventListener("DOMContentLoaded", () => {
     },
     {
       q: "Did the owner of the app have fun while making it",
-      o: ["No", "A little", "Maybe", "I'm putting this in my resume"],
-      a: 3,
+      o: ["No", "A little", "To be decided", "Maybe"],
+      a: 2,
     },
   ];
 
