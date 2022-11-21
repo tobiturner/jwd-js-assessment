@@ -36,7 +36,11 @@ window.addEventListener("DOMContentLoaded", () => {
       timer.textContent = `00:${time}`;
       // if it reaches 0, then execute calculateScore() aka the submit button
       if (time <= 0) {
+        // keep it 00:00
+        timer.textContent = `00:00`;
+        // retrieve the score, and highlight correct answers
         calculateScore();
+        // stop the interval
         clearInterval(timerId);
       }
     }, 1000)
