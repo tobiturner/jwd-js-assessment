@@ -108,5 +108,8 @@ window.addEventListener("DOMContentLoaded", () => {
   displayQuiz();
   // Be listening for the click on the submit button
   document.getElementById("btnSubmit").addEventListener("click", calculateScore,);
+  document.getElementById("btnReset").addEventListener("click", () => {
+    window.location.assign(window.location.href);
+  });
 
 });
