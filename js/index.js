@@ -44,6 +44,16 @@ window.addEventListener("DOMContentLoaded", () => {
       o: ["Sydney", "Canberra", "Melbourne", "Perth"],
       a: 1,
     },
+    {
+      q: "How long did it take to make this app?",
+      o: ["20 Minutes", "3 Hour", "5 Hours", "It depends"],
+      a: 3,
+    },
+    {
+      q: "Did the owner of the app have fun while making it",
+      o: ["No", "A little", "Maybe", "I'm putting this in my resume"],
+      a: 3,
+    },
   ];
 
   // function to Display the quiz questions and answers from the object
@@ -91,6 +101,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
       }
     });
+    document.getElementById("score").innerHTML = `Score: ${score}`;
   };
 
   // call the displayQuiz function
