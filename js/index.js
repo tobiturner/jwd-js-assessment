@@ -21,9 +21,8 @@
 
 window.addEventListener("DOMContentLoaded", () => {
   const start = document.querySelector("#start");
-  // the timer interval id
-  let timerId = null;
-  start.addEventListener("click", function (e) {
+  // click start
+  const starting = () => {
     document.querySelector("#quizBlock").style.display = "block";
     start.style.display = "none";
     // obtain timer span element
@@ -44,10 +43,21 @@ window.addEventListener("DOMContentLoaded", () => {
         calculateScore();
       }
     }, 1000);
-  });
+  };
+  // the timer interval id
+  let timerId = null;
+  start.addEventListener("click", starting);
   // quizArray QUESTIONS & ANSWERS
   // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
   // Basic ideas from https://code-boxx.com/simple-javascript-quiz/
+
+  // did we press reset, then just submit anyway
+  if (window.localStorage.getItem("reset")) {
+    // remove the reset, so if you reload, it goes back to the opening message
+    window.localStorage.removeItem("reset");
+    // as if you pressed submit
+    starting();
+  }
   const quizArray = [
     {
       q: "Which is the third planet from the sun?",
@@ -146,7 +156,8 @@ window.addEventListener("DOMContentLoaded", () => {
           liElement.style.color = "";
         }
       });
-    } else { // if all the questions were checked
+    } else {
+      // if all the questions were checked
       const scoreSpan = document.getElementById("score");
       scoreSpan.innerHTML = `Score: ${score}`;
       scoreSpan.style.display = "inline";
@@ -167,6 +178,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // add event listener to btnReset
   document.getElementById("btnReset").addEventListener("click", () => {
     //change the current location (or url), to the current location (or url) (so reloading it)
+    window.localStorage.setItem("reset", "true");
     window.location.assign(window.location.href);
   });
 });
