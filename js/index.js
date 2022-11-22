@@ -148,7 +148,7 @@ window.addEventListener("DOMContentLoaded", () => {
           radioElement = document.querySelector("#" + r);
           
           if (radioElement.checked) {
-            liElement.style.border = "2px solid red";
+            liElement.style.border = "2px solid blue";
           }
         }
       });
