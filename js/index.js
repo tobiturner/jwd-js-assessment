@@ -146,7 +146,7 @@ window.addEventListener("DOMContentLoaded", () => {
           liElement.style.color = "";
         }
       });
-    } else {
+    } else { // if all the questions were checked
       const scoreSpan = document.getElementById("score");
       scoreSpan.innerHTML = `Score: ${score}`;
       scoreSpan.style.display = "inline";
