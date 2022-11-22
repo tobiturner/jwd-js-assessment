@@ -118,6 +118,8 @@ window.addEventListener("DOMContentLoaded", () => {
           // code for task 1 goes here
           // note inside an array an option was checked for this question out of the four answers
           wasOptionsChecked.push(true);
+          // highlight the selected answer
+          liElement.style.border = "2px solid blue";
           //Check if it is the correct answer
           if (i === quizItem.a) {
             // Add to the score
@@ -142,14 +144,6 @@ window.addEventListener("DOMContentLoaded", () => {
           liElement = document.querySelector("#" + li);
           liElement.style.backgroundColor = "";
           liElement.style.color = "";
-
-          // highlight missing answers
-          let r = `radio_${index}_${i}`;
-          radioElement = document.querySelector("#" + r);
-          
-          if (radioElement.checked) {
-            liElement.style.border = "2px solid blue";
-          }
         }
       });
     } else {
