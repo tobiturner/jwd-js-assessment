@@ -155,7 +155,7 @@ window.addEventListener("DOMContentLoaded", () => {
       const timer = document.getElementById("time");
       const message = document.createElement("div");
       message.innerHTML =
-        "<div class='message'><h6>In <span class=\"green\"> green</span> is the correct answers</h6><h6 class='message'>In <span class=\"red\"> red</span> is the incorrect</h6></div>";
+        "<div class='message'><h6>In <span class=\"green\"> green</span> is the correct answers</h6><h6 class='message'>In <span class=\"red\"> red</span> is the incorrect answers</h6></div>";
       timer.appendChild(message);
     }
   };
