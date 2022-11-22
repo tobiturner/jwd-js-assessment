@@ -21,6 +21,8 @@
 
 window.addEventListener("DOMContentLoaded", () => {
   const start = document.querySelector("#start");
+  // the timer interval id
+  let timerId = null;
   start.addEventListener("click", function (e) {
     document.querySelector("#quizBlock").style.display = "block";
     start.style.display = "none";
@@ -29,9 +31,9 @@ window.addEventListener("DOMContentLoaded", () => {
     // set a minute variable
     let time = 60;
     // every 1000 miliseconds, execute the callback function
-    const timerId = setInterval(() => {
+    timerId = setInterval(() => {
       // decrement the time by one, every second
-      time--
+      time--;
       // change the span element after its been decremented
       timer.textContent = `00:${time}`;
       // if it reaches 0, then execute calculateScore() aka the submit button
@@ -40,10 +42,8 @@ window.addEventListener("DOMContentLoaded", () => {
         timer.textContent = `00:00`;
         // retrieve the score, and highlight correct answers
         calculateScore();
-        // stop the interval
-        clearInterval(timerId);
       }
-    }, 1000)
+    }, 1000);
   });
   // quizArray QUESTIONS & ANSWERS
   // q = QUESTION, o = OPTIONS, a = CORRECT ANSWER
@@ -94,8 +94,11 @@ window.addEventListener("DOMContentLoaded", () => {
   };
 
   // Calculate the score
-  const calculateScore = () => {
+  const calculateScore = (e) => {
+    // if submitted or timer ran out, stop the timer by clearing the interval
+    clearInterval(timerId);
     let score = 0;
+    let wasOptionsChecked = [];
     quizArray.map((quizItem, index) => {
       for (let i = 0; i < 4; i++) {
         //highlight the li if it is the correct answer
@@ -106,22 +109,61 @@ window.addEventListener("DOMContentLoaded", () => {
 
         if (quizItem.a == i) {
           //change background color of li element here
-          liElement.style.backgroundColor = 'green';
-        }
 
-        
+          liElement.style.backgroundColor = "green";
+          liElement.style.color = "white";
+        }
         // console.log(quizItem);
         if (radioElement.checked) {
           // code for task 1 goes here
+          // note inside an array an option was checked for this question out of the four answers
+          wasOptionsChecked.push(true);
           //Check if it is the correct answer
           if (i === quizItem.a) {
             // Add to the score
             score += 1;
+          } else {
+            // indicating the answer was wrong
+            liElement.style.backgroundColor = "red";
+            liElement.style.color = "white";
           }
         }
       }
     });
-    document.getElementById("score").innerHTML = `Score: ${score}`;
+
+    // comparing if button was clicked with e or timer ranout (then there is no event object passed), and if all the options were checked by comparing the number of questions to how many radioboxes were checked
+    if (e && wasOptionsChecked.length !== quizArray.length) {
+      alert("You have not answered all the questions, there is still time, its worth a guess");
+      // don't show the answers, set colors back to default, highlight missing answers
+      quizArray.map((quizItem, index) => {
+        for (let i = 0; i < 4; i++) {
+          // remove answers
+          let li = `li_${index}_${i}`;
+          liElement = document.querySelector("#" + li);
+          liElement.style.backgroundColor = "";
+          liElement.style.color = "";
+
+          // highlight missing answers
+          let r = `radio_${index}_${i}`;
+          radioElement = document.querySelector("#" + r);
+          
+          if (radioElement.checked) {
+            liElement.style.border = "2px solid red";
+          }
+        }
+      });
+    } else {
+      const scoreSpan = document.getElementById("score");
+      scoreSpan.innerHTML = `Score: ${score}`;
+      scoreSpan.style.display = "inline";
+
+      // add message
+      const timer = document.getElementById("time");
+      const message = document.createElement("div");
+      message.innerHTML =
+        "<div class='message'><h6>In <span class=\"green\"> green</span> is the correct answers</h6><h6 class='message'>In <span class=\"red\"> red</span> is the incorrect</h6></div>";
+      timer.appendChild(message);
+    }
   };
 
   // call the displayQuiz function
@@ -133,5 +175,4 @@ window.addEventListener("DOMContentLoaded", () => {
     //change the current location (or url), to the current location (or url) (so reloading it)
     window.location.assign(window.location.href);
   });
-
 });

@@ -1,0 +1,34 @@
+
+/* margin from top for title */
+.container div > h2 {
+  margin-top: 20px;
+}
+/* add space at the botttom */
+#quizBlock {
+  margin-bottom: 10em;
+}
+/* add space next each button */
+#btnReset {
+  margin-left: 10px;
+}
+
+#score {
+  display: none;
+  font-size: 20px;
+  float: right;
+  background-color: rgb(89, 0, 255);
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.green {
+  color: green;
+}
+.red {
+  color: red;
+}
+
+.message {
+  margin-top: 10px;
+}
